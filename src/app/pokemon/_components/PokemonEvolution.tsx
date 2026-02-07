@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Pokemon } from "@/types/pokemon";
 
 interface PokemonEvolutionProps {
@@ -21,7 +22,12 @@ export default function PokemonEvolution({ pokemon }: PokemonEvolutionProps) {
                 {pokemon.evolutions.map(evo => (
                     <Link key={evo.id} href={`/pokemon/${evo.name}`} className="group flex flex-col items-center bg-gray-50 p-6 rounded-2xl border border-gray-100 transition-all hover:bg-blue-50 hover:border-blue-100">
                         <div className="relative w-24 h-24 mb-3 transition-transform group-hover:scale-110">
-                            <img src={evo.image} alt={evo.name} className="w-full h-full object-contain" />
+                            <Image
+                                src={evo.image}
+                                alt={evo.name}
+                                fill
+                                className="object-contain"
+                            />
                         </div>
                         <p className="font-bold text-gray-700 group-hover:text-black">{evo.name}</p>
                     </Link>

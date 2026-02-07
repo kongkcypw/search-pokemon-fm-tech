@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { PokemonPreview } from "@/types/pokemon";
 import { useRouter } from "next/navigation";
 import { FaTrash } from "react-icons/fa";
@@ -27,7 +29,14 @@ export function FavoriteCard({ poke, onRemove }: Props) {
                 <FaTrash size={14} className="cursor-pointer" />
             </button>
 
-            <img src={poke.image} alt={poke.name} className="w-24 h-24 object-contain mb-3 transition-transform group-hover:scale-110" />
+            <div className="relative w-24 h-24 mb-3 transition-transform group-hover:scale-110">
+                <Image
+                    src={poke.image}
+                    alt={poke.name}
+                    fill
+                    className="object-contain"
+                />
+            </div>
             <p className="font-bold text-gray-700 capitalize text-lg">{poke.name}</p>
         </div>
     );

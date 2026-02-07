@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function FeaturedPokemon() {
 
+    // Static featured pokemon
     const FEATURED_POKEMON = [
         { name: "Bulbasaur", id: "001", image: "https://img.pokemondb.net/artwork/bulbasaur.jpg", borderColor: "border-green-200", hoverColor: "hover:border-green-500" },
         { name: "Charmander", id: "004", image: "https://img.pokemondb.net/artwork/charmander.jpg", borderColor: "border-red-200", hoverColor: "hover:border-red-500" },
@@ -21,9 +23,10 @@ export default function FeaturedPokemon() {
                         className={`bg-white border-2 ${poke.borderColor} rounded-2xl p-4 flex flex-col items-center group transition-all hover:ring-2 hover:ring-offset-2 hover:ring-transparent ${poke.hoverColor}`}
                     >
                         <div className="relative w-16 h-16 transition-transform group-hover:scale-110">
-                            <img
+                            <Image
                                 src={poke.image}
                                 alt={poke.name}
+                                fill
                                 className="object-contain"
                             />
                         </div>

@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { POKEMON_FAVORITE_STORAGE_KEY } from "@/constants/pokemon";
 
 export function useFavoritePokemon() {
     const [favorite, setFavorite] = useState<string[]>([]);
 
-    const loadFavorites = useCallback(() => {
-        const stored = localStorage.getItem(POKEMON_FAVORITE_STORAGE_KEY);
-        if (stored) {
-            setFavorite(JSON.parse(stored));
-        }
-    }, []);
-
     useEffect(() => {
+        const loadFavorites = () => {
+            const stored = localStorage.getItem(POKEMON_FAVORITE_STORAGE_KEY);
+            if (stored) {
+                setFavorite(JSON.parse(stored));
+            }
+        };
+
         loadFavorites();
 
         const handleStorageChange = (e: StorageEvent) => {
@@ -24,7 +24,7 @@ export function useFavoritePokemon() {
 
         window.addEventListener("storage", handleStorageChange);
         return () => window.removeEventListener("storage", handleStorageChange);
-    }, [loadFavorites]);
+    }, []);
 
     const isFavorite = (name: string) =>
         favorite.some((fav) => fav.toLowerCase() === name.toLowerCase());

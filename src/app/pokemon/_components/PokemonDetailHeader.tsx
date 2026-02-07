@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import BackButton from "@/components/BackButton";
 import { useFavoritePokemon } from "@/hooks/useFavoritePokemon";
 import { Pokemon } from "@/types/pokemon";
@@ -26,7 +28,14 @@ export default function PokemonDetailHeader({ pokemon }: PokemonDetailHeaderProp
         <div>
             <BackButton />
             <div className="flex flex-col md:flex-row gap-8 items-start">
-                <img src={pokemon.image} alt={pokemon.name} className="w-64 h-64 object-contain p-4 border border-gray-400 rounded-lg" />
+                <div className="relative w-64 h-64 p-4 border border-gray-400 rounded-lg">
+                    <Image
+                        src={pokemon.image}
+                        alt={pokemon.name}
+                        fill
+                        className="object-contain p-4"
+                    />
+                </div>
 
                 <div className="flex-1">
                     <div className="flex items-center justify-between">
