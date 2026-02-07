@@ -28,3 +28,12 @@ export const GET_POKEMON_DETAILS = gql`
     }
   }
 `;
+
+export const GET_POKEMON_LIST = gql`
+  query pokemons($first: Int!) {
+    pokemons(first: $first) {
+      id
+      name
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-export interface Attack {
+export interface PokemonAttack {
     name: string;
     type: string;
     damage: number;
@@ -10,8 +10,8 @@ export interface Pokemon {
     image: string;
     types: string[];
     attacks: {
-        fast: Attack[];
-        special: Attack[];
+        fast: PokemonAttack[];
+        special: PokemonAttack[];
     };
     evolutions: {
         id: string;
@@ -20,6 +20,15 @@ export interface Pokemon {
     }[] | null;
 }
 
-export interface GetPokemonData {
+export interface GetPokemonDetailData {
     pokemon: Pokemon | null;
+}
+
+export interface PokemonPreview {
+    id: string;
+    name: string;
+}
+
+export interface GetPokemonListData {
+    pokemons: PokemonPreview[];
 }
