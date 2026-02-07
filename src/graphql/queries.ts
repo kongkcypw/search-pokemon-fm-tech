@@ -34,6 +34,7 @@ export const GET_POKEMON_LIST = gql`
     pokemons(first: $first) {
       id
       name
+      image
     }
   }
 `;

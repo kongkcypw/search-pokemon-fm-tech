@@ -27,6 +27,7 @@ export interface GetPokemonDetailData {
 export interface PokemonPreview {
     id: string;
     name: string;
+    image: string;
 }
 
 export interface GetPokemonListData {

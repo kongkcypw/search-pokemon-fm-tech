@@ -4,21 +4,22 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePokemonList } from "@/hooks/usePokemonList";
-import { POKEMON_LIST_LIMIT, POKEMON_SEARCH_LIMIT } from "@/constants/pokemon";
+import { POKEMON_LIST_LIMIT } from "@/constants/pokemon";
+import { SEARCH_SUGGESTION_LIMIT } from "@/constants/search-bar";
+import { PokemonPreview } from "@/types/pokemon";
 
 export default function SearchBar() {
     const router = useRouter();
-    const [query, setQuery] = useState("");
-    const [isFocused, setIsFocused] = useState(false);
+    const [query, setQuery] = useState<string>("");
+    const [isFocused, setIsFocused] = useState<boolean>(false);
     const { pokemonList } = usePokemonList(POKEMON_LIST_LIMIT);
 
-    // Memoize the filtered list to prevent unnecessary calculations on every render
     const suggestions = useMemo(() => {
         if (!query || query.length < 1 || !pokemonList) return [];
 
         return pokemonList
-            .filter((p: any) => p.name.toLowerCase().startsWith(query.toLowerCase()))
-            .slice(0, POKEMON_SEARCH_LIMIT);
+            .filter((p: PokemonPreview) => p.name.toLowerCase().startsWith(query.toLowerCase()))
+            .slice(0, SEARCH_SUGGESTION_LIMIT);
     }, [query, pokemonList]);
 
     const handleSearch = (e: React.FormEvent) => {
@@ -46,7 +47,7 @@ export default function SearchBar() {
             {/* Suggestion Dropdown */}
             {isFocused && suggestions.length > 0 && (
                 <ul className="absolute z-10 w-full bg-white border rounded mt-1 shadow-lg overflow-hidden">
-                    {suggestions.map((pokemon: any) => (
+                    {suggestions.map((pokemon: PokemonPreview) => (
                         <li key={pokemon.id}>
                             <Link
                                 href={`/pokemon/${pokemon.name}`}
